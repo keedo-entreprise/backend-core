@@ -1045,6 +1045,9 @@ h1, h2, h3, h4, h5, h6, figure {
 input[type="text"] {
   height: 50px;
 }
+select{
+  height: 45px !important;
+}
 
 .form-group {
   margin-bottom: 30px;
