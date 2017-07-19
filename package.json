@@ -1,13 +1,26 @@
-{"name": "primos",
+{
+  "name": "primos",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "prod-server": "node ./bin/www --prod --config=",
+    "dev-server": "node ./bin/www",
+    "i18n-watch": "node ./scripts/i18n-watch.js",
+    "dev": "concurrently --kill-others \"npm run i18n-watch\" \"npm run dev-server\""
   },
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
+    "ejs": "^2.5.6",
+    "ejs-locals": "^1.0.2",
     "express": "~4.13.4",
+    "i18n": "^0.8.3",
+    "lru-cache": "^4.1.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "json-concat": "0.0.1",
+    "watch": "^1.0.2"
   }
 }
