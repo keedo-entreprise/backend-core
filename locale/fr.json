@@ -1,5 +1,6 @@
-{"Login" : "Entrer",
-  "Hello" : "Bienvenue"
+{
+  "Stories" : "مرحبا",
+  "Browse" : "Découvrir"
 ,
-  "Stories" : "مرحبا"
-}
+  "Hello" : "Bienvenue"
+,"Login" : "Entrer"}
