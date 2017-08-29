@@ -1,0 +1,48 @@
+<%- layout('./../../layout_admin') -%>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+    <div id="fh5co-portfolio">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <h2><%= __('Categories') %></h2>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                </div>
+            </div>
+            <div class="row">
+                <% _.each(list, function(category){ %>
+                <div class="col-md-4">
+                    <div class="fh5co-portfolio animate-box">
+                        <a href="/admin/categories/<%= category._id %>">
+                            <div class="portfolio-entry"
+                                 style="background-image: url('/assets/f5d549e32682eec349a08739410269bb.jpg');"></div>
+                            <div class="portfolio-text">
+                                <h3><%= category.name %></h3>
+                                <ul class="stuff">
+                                    <li><i class="icon-heart2"></i>200</li>
+                                    <li><i class="icon-eye2"></i>248</li>
+                                    <li><i class="icon-download3"></i>240</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <% }); %>
+                <div class="col-md-4">
+                    <div class="fh5co-portfolio animate-box">
+                        <a href="/admin/categories/new">
+                            <div class="portfolio-text">
+                                <h3><%= __('New Category') %></h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+</div>

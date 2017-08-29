@@ -1,0 +1,8 @@
+<% if (env.isProd) { %>
+<!-- Main -->
+<script src="/js/dist/vendor.bundle.min.js"></script>
+<script src="/js/dist/common.bundle.min.js"></script>
+<% } else { %>
+<script src="/js/dist/vendor.bundle.js"></script>
+<script src="/js/dist/common.bundle.js"></script>
+<% } %>

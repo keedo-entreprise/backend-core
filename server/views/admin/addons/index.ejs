@@ -1,0 +1,28 @@
+<%- layout('./../../layout_admin') %>
+
+<div class="container">
+    <form action="/admin/addons/upload" method="post">
+        <label>
+            <select name="type">
+
+            </select>
+        </label>
+        <div id="dropzone" class="dropzone">
+            <div class="fallback">
+                <input name="file" type="file" multiple/>
+            </div>
+        </div>
+    </form>
+    <hr/>
+    <h2><%= __('List') %></h2>
+    <div id="list_items" class="app__list">
+        <div v-for="item in list" class="app__listItemWithImage">
+                <img :src="addOnsHostUrl + item.fileName"/>
+        </div>
+    </div>
+</div>
+<% if (env.isProd) { %>
+<% block('scripts', "<script src='/js/dist/admin_uploader.bundle.min.js'></script>"); %>
+<% } else { %>
+<% block('scripts', "<script src='/js/dist/admin_uploader.bundle.js'></script>"); %>
+<% } %>

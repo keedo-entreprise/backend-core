@@ -3,24 +3,41 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prod-server": "node ./bin/www --prod --config=",
-    "dev-server": "node ./bin/www",
-    "i18n-watch": "node ./scripts/i18n-watch.js",
-    "dev": "concurrently --kill-others \"npm run i18n-watch\" \"npm run dev-server\""
+    "prod": "node ./bin/www --prod --config=",
+    "dev-nodemon": "nodemon bin\\www --watch server --watch locale",
+    "dev-browser-sync": "browser-sync start --config bs-config.js",
+    "dev-i18n-watch": "node ./scripts/i18n-watch.js",
+    "dev-sass": "nodemon  ./scripts/sass-watch.js --watch public/sass -e scss,sass",
+    "test-browser-sync": "browser-sync start -s ",
+    "dev": "concurrently --kill-others \"npm run dev-sass\" \"npm run dev-i18n-watch\" \"npm run dev-browser-sync\" \"npm run dev-nodemon\""
   },
   "dependencies": {
+    "app-utils": "file:modules\\app-utils",
+    "bluebird": "^3.5.0",
     "body-parser": "~1.15.1",
+    "busboy": "^0.2.14",
     "cookie-parser": "~1.4.3",
+    "crypto": "0.0.3",
     "ejs": "^2.5.6",
     "ejs-locals": "^1.0.2",
     "express": "~4.13.4",
+    "express-session": "^1.15.4",
+    "express3-handlebars": "^0.5.2",
     "i18n": "^0.8.3",
+    "longjohn": "^0.2.12",
     "lru-cache": "^4.1.1",
+    "models": "file:modules\\models",
+    "mongoose": "^4.11.3",
+    "moniker": "^0.1.2",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.12",
     "concurrently": "^3.5.0",
     "json-concat": "0.0.1",
-    "watch": "^1.0.2"
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "watch": "^1.0.2",
+    "webpack": "^3.5.5"
   }
 }

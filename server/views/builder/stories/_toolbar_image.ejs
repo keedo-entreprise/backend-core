@@ -1,0 +1,94 @@
+<ul class="list-inline" id="toolbar__image" style="display: none">
+    <li>
+        <button data-toolbar-for="picture"><i class="icon-"></i></button>
+        <div class="toolbar__popover" data-toolbar="picture">
+            Music
+
+        </div>
+    </li>
+    <li>
+        <button data-toolbar-for="icons"><i class="icon-angry"></i></button>
+        <div class="toolbar__popover" data-toolbar="icons">
+
+            Music
+
+        </div>
+    </li>
+    <li>
+        <button data-toolbar-for="music"><i class="icon-music2"></i></button>
+        <div class="toolbar__popover" id="toolbar_music" data-toolbar="music">
+            <div>
+                <a href="" id="refine-hue-minus" class="left"><i
+                            class="nc-icon-mini arrows-1_bold-left"></i></a>
+                <span>Hue</span>
+                <a href="" id="refine-hue-plus" class="right"><i
+                            class="nc-icon-mini arrows-1_bold-right"></i></a>
+            </div>
+            <div>
+                <a href="" id="refine-saturation-minus" class="left"><i
+                            class="nc-icon-mini ui-1_bold-delete"></i></a>
+                <span>Saturation</span>
+                <a href="" id="refine-saturation-plus" class="right"><i class="nc-icon-mini ui-1_bold-add"></i></a>
+            </div>
+            <div>
+                <a href="" id="refine-brightness-minus" class="left"><i
+                            class="nc-icon-mini ui-1_bold-delete"></i></a>
+                <span>Brightness</span>
+                <a href="" id="refine-brightness-plus" class="right"><i class="nc-icon-mini ui-1_bold-add"></i></a>
+            </div>
+            <div>
+                <a href="" id="refine-temperature-minus" class="left"><i
+                            class="nc-icon-mini ui-1_bold-delete"></i></a>
+                <span>Temperature</span>
+                <a href="" id="refine-temperature-plus" class="right"><i class="nc-icon-mini ui-1_bold-add"></i></a>
+            </div>
+
+        </div>
+    </li>
+    <li>
+        <button data-action="galaxy"><i class="icon-earth"></i></button>
+    </li>
+    <li>
+        <button data-action="pattern"><i class="icon-earth"></i></button>
+    </li>
+</ul>
+<!-- template for the modal component -->
+<script type="text/x-template" id="modal_template">
+    <transition name="modal">
+        <div class="modal__mask">
+            <div class="modal__wrapper">
+                <div class="modal__container">
+                    <div class="modal__header">
+                        <slot name="header">
+                            default header
+                        </slot>
+                    </div>
+
+                    <div class="modal__body">
+                        <slot name="body">
+                        </slot>
+                    </div>
+
+                    <div class="modal__footer">
+                        <slot name="footer">
+                            default footer
+                            <button class="modal__default-button" @click="$emit('close')">
+                                OK
+                            </button>
+                        </slot>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+</script>
+<div id="patterns_modal">
+    <!-- use the modal component, pass in the prop -->
+    <modal v-if="showModal" @close="showModal = false">
+        <div slot="body" v-for="pattern in patterns">
+            <div class="col-md-4">
+                <img class="modal__imageElement" :src="'/assets/patterns/' + pattern.src"/>
+            </div>
+        </div>
+    </modal>
+</div>

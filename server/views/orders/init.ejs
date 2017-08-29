@@ -1,0 +1,84 @@
+<%- layout('./../layout') %>
+<div class="text-center">
+    <div class="container">
+        <form action="/orders/init/" method="post">
+            <input type="hidden" value="<%= item.id %>" name="story_id"/>
+            <h2>Purchase </h2>
+            <div class="col-md-3 col-md-push-1 animate-box fadeInUp animated-fast">
+
+                <ul class="purchase__choices">
+                    <li class="purchase__choicesLine">
+                        <h5>Paper type <i class="icon-colours"></i></h5>
+                        <ul>
+                            <li> Wood
+                                <div class="card__color" data-type="wood"></div>
+                            </li>
+                            <li> Wood
+                                <div class="card__color" data-type="wood"></div>
+                            </li>
+                            <li>
+                                <span>Wood</span>
+                                <div class="card__color" data-type="wood"></div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="purchase__choicesLine">
+                        <h5>Paper type <i class="icon-colours"></i></h5>
+                        <div>
+                            <div class="card__color" data-type="trxe"></div>
+                            <div class="card__color" data-type="tree"></div>
+                            <div class="card__color" data-type="tree"></div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-7 col-md-push-1 animate-box fadeInUp animated-fast">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="<%= __("Last Name") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="<%= __("First Name") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="<%= __("Phone") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="<%= __("Email") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="<%= __("City") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="<%= __("Zip code") %>">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                        <textarea name="" class="form-control" id="" cols="20" rows="4"
+                                  placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button class="btn btn-demo" type="submit"> Preview <i class="icon-eye"></i> </button>
+                            <button class="btn btn-primary"> Checkout <i class="icon-check"></i> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

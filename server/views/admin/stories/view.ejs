@@ -1,0 +1,9 @@
+<% layout('./../../layout_admin') %>
+
+<% include ./../../stories/_view %>
+<% if (env.isProd) { %>
+<% block('scripts', "<script src='/js/dist/viewer.bundle.min.js'></script>"); %>
+<% } else { %>
+<% block('scripts', "<script src='/js/dist/viewer.bundle.js'></script>"); %>
+<% } %>
+

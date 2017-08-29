@@ -1,0 +1,44 @@
+<%- layout('./../../layout_admin') -%>
+<div id="fh5co-contact">
+    <div class="container">
+        <div class="row animate-box fadeInUp animated-fast">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>New category </h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <form action="/admin/categories/" method="post">
+                <div class="col-md-8 col-md-offset-2  animate-box fadeInUp animated-fast">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="name_en" class="form-control" placeholder="En">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="name_fr" class="form-control" placeholder="Français">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text"   name="name_ar" class="form-control" placeholder="عربي">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<% block('scripts', "<script src='/js/edit.js'></script>"); %>

@@ -1,0 +1,49 @@
+<%- layout('./../../layout_admin') -%>
+<div id="fh5co-contact">
+    <div class="container">
+        <div class="row animate-box fadeInUp animated-fast">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Update category </h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <% if(error) { %>
+            <div class="alert-danger">
+                <%= error %>
+            </div>
+            <br>
+            <% } %>
+            <form action="/admin/categories" method="post">
+                <input type="hidden" value="<%= entry.id %>" name="id">
+                <div class="col-md-8 col-md-offset-2  animate-box fadeInUp animated-fast">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" value="<%= entry.name %>" name="name_en" class="form-control"
+                                       placeholder="En">
+                            </div>
+                        </div>
+                        <% for(var i = 0; i < entry.locales.length; i++) { %>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="name_<%= entry.locales[i].locale %>" value="<%= entry.locales[i].value %>" class="form-control" placeholder="<%= entry.locales[i].locale %>">
+                            </div>
+                        </div>
+                        <% } %>
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <input type="submit" value="Update" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<% block('scripts', "<script src='/js/edit.js'></script>"); %>

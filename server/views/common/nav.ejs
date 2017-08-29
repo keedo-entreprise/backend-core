@@ -1,0 +1,26 @@
+<nav class="fh5co-nav" role="navigation">
+        <div class="top-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div id="fh5co-logo"><a href="/">Keedo<span>.</span></a></div>
+                    </div>
+                    <% if ((typeof (noNavigation) !== typeof (undefined)) && noNavigation) { %>
+                        <ul></ul>
+                    <% } else { %>
+                    <div class="col-xs-10 text-right menu-1">
+                        <ul>
+                            <li class="<%= activeUrl === 'browse' ? 'active' : '' %>"><a href="/stories"><%= __('Browse') %></a></li>
+                            <li class="<%= activeUrl === 'categories' ? 'active' : '' %>"><a href="/categories"><%= __('Categories') %></a></li>
+                            <li class="btn-cta <%= activeUrl === 'pre-order' ? 'active' : '' %>"><a href="/pre-order"><span><%= __('Browse') %></span></a></li>
+                            <% if (typeof (isAdmin) !== typeof (undefined)) {%>
+                                <li><a href="/admin/manage"><%= __('Manage') %></a></li>
+                            <%}%>
+                        </ul>
+                    </div>
+                    <% } %>
+                </div>
+
+            </div>
+        </div>
+    </nav>

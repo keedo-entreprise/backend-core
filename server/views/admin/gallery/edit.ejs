@@ -1,0 +1,54 @@
+<%- layout('./../../layout_admin') -%>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+    <div id="fh5co-portfolio">
+        <div class="container">
+            <% if(error) { %>
+            <div class="alert-danger">
+                <%= error %>
+            </div>
+            <br>
+            <% } %>
+            <form action="/admin/pictures" method="post" enctype='multipart/form-data'>
+                <div class="col-md-8 col-md-offset-2  animate-box fadeInUp animated-fast">
+                    <% if (item.id) {%>
+                    <input type="hidden" name="id" value="<%= item.id %>">
+                    <% } %>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" value="<%= item.title || '' %>" name="title" class="form-control" placeholder="Title">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" name="category_id">
+                                    <% for(var i = 0; i < categories.length; i++) { %>
+                                    <option
+                                            value="<%= categories[i].id %>"><%= categories[i].name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="file" name="picture" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <input type="submit" value="<%= item.id ? __('Update') : __('Create') %>" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+</div>

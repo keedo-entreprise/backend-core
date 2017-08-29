@@ -1,0 +1,51 @@
+<% layout('../layout') -%>
+
+
+<div class="container">
+    <div class="row">
+        <% if(error) { %>
+        <div class="row alert-danger">
+            <%= error %>
+        </div>
+        </br>
+        <% } %>
+        <form action="/accounts/register" method="post">
+            <div class="col-md-6 col-md-offset-3 animate-box fadeInUp animated-fast">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="username" class="form-control" placeholder="<%= __('Username') %>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" placeholder="<%= __('Email') %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control"
+                                   placeholder="<%= __('Password') %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="re_password" class="form-control"
+                                   placeholder="<%= __('Password') %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <input type="submit" value="<%= __('Register') %>" class="btn btn-primary">
+                            <a href="/accounts/login" class="btn btn-primary"><%= __('Already have an account, login') %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

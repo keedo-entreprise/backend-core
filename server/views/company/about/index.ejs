@@ -1,0 +1,13 @@
+<%- layout('./../../layout') %>
+
+<div id="page">
+    <div class="container">
+        <% if (locale == 'ar') { %>
+        <% include ar %>
+        <% } else if (locale == 'fr') { %>
+        <% include fr %>
+        <% } else { %>
+        <% include en %>
+        <% } %>
+    </div>
+</div>

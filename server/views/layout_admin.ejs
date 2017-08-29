@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <%- include common/head.ejs %>
+  <%- blocks.stylesheets %>
+  <body>
+    <%- include common/nav.ejs %>
+    <section id="page">
+      <%- body -%>
+      <%- include common/footer.ejs %>
+    </section>
+    <%- include common/scripts.ejs %>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <%- blocks.scripts %>
+  </body>
+</html>

@@ -1,6 +1,24 @@
-{"Login" : "Login",
-  "Hello" : "Hello"
-,
-  "Stories" : "مرحبا",
-  "Browse" : "Browse"
+{
+	"Login": "Login",
+	"Hello": "Hello",
+	"About": "About us",
+	"Contact": "Contact us",
+	"Welcome": "There are 360 degrees, so why stick to one?",
+	"Orders": "Orders",
+	"Users": "Users",
+	"Read More": "Read More",
+	"View Demo": "View Demo",
+	"Learn more": "Learn more",
+	"Entrepreneur": "Entrepreneur",
+	"Top Stories": "Top Stories",
+	"Browse": "Browse",
+	"Categories": "Categories",
+	"Gallery": "Gallery",
+	"Stories": "Stories",
+	"texture": "texture",
+	"geo": "geo",
+	"music": "music",
+	"List": "List",
+	"architecture": "architecture",
+	"space": "space"
 }

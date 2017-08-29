@@ -1,0 +1,44 @@
+<%- layout('./../layout') %>
+<% block('head', "<script src='https://www.paypalobjects.com/api/checkout.js'></script>"); %>
+<div class="text-center">
+    <div class="container">
+        <form>
+            <h2>Purchase </h2>
+
+        </form>
+    </div>
+    <div id="paypal-button"></div>
+
+    <script>
+        paypal.Button.render({
+            env: 'sandbox', // Or 'sandbox',
+            client: {
+                // 'AbXuQwYIf5GabfIWJjUpGZrp1VGnTnq_ZKsOkyaqZyO7dHgFVd7t7mMSZ9iZOuAmG55Ae0D9TknPZI5V'
+                sandbox: "<%= paypal.SANDBOX_CLIENT %>",
+                production: "<%= paypal.PRODUCTION_CLIENT %>"
+            },
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: {total: '1.00', currency: 'EUR'}
+                            }
+                        ]
+                    }
+                });
+            },
+
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function (payment) {
+                    console.log(payment);
+                    // The payment is complete!
+                    // You can now show a confirmation message to the customer
+                });
+            }
+
+        }, '#paypal-button');
+    </script>
+</div>

@@ -1,0 +1,48 @@
+<% layout('../layout') -%>
+
+
+<div class="container">
+    <div class="row">
+        <% if(error) { %>
+        <div class="alert-danger">
+            <%= error %>
+        </div>
+        <br>
+        <% } %>
+        <div class="row">
+            <form action="/accounts/login" method="post">
+                <div class="col-md-6 col-md-offset-3 animate-box fadeInUp animated-fast">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="username" class="form-control"
+                                       placeholder="<%= __('Username') %>">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control"
+                                       placeholder="<%= __('Password') %>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <input type="submit" value="<%= __('Login') %>" class="btn btn-primary">
+                                <a href="/accounts/register"
+                                   class="btn btn-primary"><%= __('New, create a new account !') %></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+            <% if(error) { %>
+            <div class="col-md-offset-4 text-center col-lg-4">
+                <a href="/accounts/forgot-password" class="alert alert-danger "><%= __('Forgot password') %></a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>

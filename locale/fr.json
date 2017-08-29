@@ -1,6 +1,16 @@
 {
-  "Stories" : "مرحبا",
-  "Browse" : "Découvrir"
-,
-  "Hello" : "Bienvenue"
-,"Login" : "Entrer"}
+	"Orders": "Commandes",
+	"Stories": "Histoires",
+	"Browse": "Découvrir",
+	"Read More": "Voir plus",
+	"Users": "Utilisateurs",
+	"Login": "Entrer",
+	"Hello": "Bienvenue",
+	"About": "À propos de nous",
+	"Welcome": "Il y a 360 degrés, alors pourquoi s'en tenir à un?",
+	"View Demo": "View Demo",
+	"Learn more": "Learn more",
+	"Entrepreneur": "Entrepreneur",
+	"Top Stories": "Top Stories",
+	"Categories": "Categories"
+}
