@@ -1,16 +1,19 @@
 {
-	"Orders": "Commandes",
+	"Login": "Entrer",
+	"New, create a new account !": "Créer un nouveau compte",
 	"Stories": "Histoires",
 	"Browse": "Découvrir",
 	"Read More": "Voir plus",
-	"Users": "Utilisateurs",
-	"Login": "Entrer",
+	"Orders": "Commandes",
 	"Hello": "Bienvenue",
 	"About": "À propos de nous",
 	"Welcome": "Il y a 360 degrés, alors pourquoi s'en tenir à un?",
+	"Users": "Utilisateurs",
+	"Username": "Username",
+	"Password": "Password",
+	"Categories": "Categories",
 	"View Demo": "View Demo",
-	"Learn more": "Learn more",
+	"Create yours": "Create yours",
 	"Entrepreneur": "Entrepreneur",
-	"Top Stories": "Top Stories",
-	"Categories": "Categories"
+	"Top Stories": "Top Stories"
 }

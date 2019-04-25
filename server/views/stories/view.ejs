@@ -1,22 +1,12 @@
 <% layout('./../layout') %>
-<!--<div class="main clearfix">-->
-    <!--<div class="bb-custom-wrapper">-->
-        <!--<div id="book_viewer" class="bb-bookblock">-->
-
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="main clearfix">
     <div id="preview_menu" class="row text-center">
-        <button class="btn btn-success">Customize</button>
-        <a class="btn btn-danger" href="/orders/init/<%= item.id %>">Purchase now 14,9 dt </a>
+        <button class="btn btn-success"><%= __('Print') %></button>
+        <a class="btn btn-danger"
+           href="/orders/init/<%= item.id %>"><%= __('Customize and Print') %> </a>
+        <span><%= item.price_tn %></span>
     </div>
 </div>
-<% include _view %>
+<% include viewer/_view %>
 
-<% if (env.isProd) { %>
-<% block('scripts', "<script src='/js/dist/viewer.bundle.min.js'></script>"); %>
-<% } else { %>
-<% block('scripts', "<script src='/js/dist/viewer.bundle.js'></script>"); %>
-<% } %>
 

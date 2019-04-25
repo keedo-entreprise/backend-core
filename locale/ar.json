@@ -1,15 +1,24 @@
-{"Login" : "دخول",
-  "Hello" : "مرحبا",
-  "About" : "عنا"
-,
-  "Welcome" : "الإبداع هو العقل البري و منضبطة العين"
-,
-  "Orders" : "طلبات"
-,
-  "Stories" : "قصص",
-  "Browse" : "اكتشف",
-
-  "Read More": "المزيد"
-,
-  "Users" : "المستخدمين"
+{
+	"Login": "دخول",
+	"Hello": "مرحبا",
+	"About": "عنا",
+	"Welcome": "الإبداع هو العقل البري و منضبطة العين",
+	"Orders": "طلبات",
+	"Stories": "قصص",
+	"Browse": "اكتشف",
+	"Read More": "المزيد",
+	"Users": "المستخدمين",
+	"View Demo": "View Demo",
+	"Learn more": "Learn more",
+	"Entrepreneur": "Entrepreneur",
+	"Top Stories": "Top Stories",
+	"Categories": "Categories",
+	"Username": "Username",
+	"Password": "Password",
+	"New, create a new account !": "New, create a new account !",
+	"Gallery": "Gallery",
+	"Manage": "Manage",
+	"Log  out": "Log  out",
+	"Create new Story": "Create new Story",
+	"Create yours": "Create yours"
 }

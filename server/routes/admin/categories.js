@@ -14,6 +14,12 @@ function renderView(viewName, res, loclas) {
 /**
  *
  */
+router.get('/new', (req, res) => {
+    renderView('new', res);
+});
+/**
+ *
+ */
 router.get('/', (req, res) => {
     models.Category.find(function (err, items) {
         renderView('list', res, {list: items});
@@ -34,12 +40,6 @@ router.get('/:id', (req, res) => {
         }
     )
 
-});
-/**
- *
- */
-router.get('/new', (req, res) => {
-    renderView('new', res);
 });
 /**
  *

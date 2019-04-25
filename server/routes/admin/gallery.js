@@ -87,7 +87,7 @@ router.post('/', (req, res) => {
                 if (err) {
                     return res.send(err)
                 }
-                res.redirect('/admin/pictures');
+                res.redirect('/admin/gallery');
             };
             console.log(properties)
             console.log(properties)

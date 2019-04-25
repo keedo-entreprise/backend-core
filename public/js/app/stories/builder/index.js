@@ -23,11 +23,12 @@ require('./builder.js');
 
 
 $(document).ready(function () {
+    console.log('xxxxxxx');
     $('button#preview_btn').click(function () {
         if (screenfull.enabled) {
             screenfull.request($('#previewContainer')[0]);
         }
-    })
+    });
     $('#previewContainer').dblclick(function () {
         if (screenfull.enabled) {
             screenfull.request($('#previewContainer')[0]);

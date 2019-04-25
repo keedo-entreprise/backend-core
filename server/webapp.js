@@ -1,28 +1,31 @@
 "use strict";
 let express = require('express');
 let path = require('path');
+
 let favicon = require('serve-favicon');
 let bodyParser = require('body-parser');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+
 let i18n = require("i18n");
-let LRU = require('lru-cache');
-let db = require('./db');
+//let LRU = require('lru-cache');
+//let db = require('./db');
+require('./utils/logger.js');
 
 
-if (process.env.NODE_ENV !== 'production'){
-    console.log("#################");
+if (process.env.NODE_ENV !== 'production') {
+    console.log("DEV");
     require('longjohn');
 }
 // ejs + ejs locals
 let engine = require('ejs-locals')
 //
-let appUtils = require('app-utils')  ;
-let helpers = appUtils.helpers;
+let locals = require('./utils/locals');
+let helpers = require('./utils/helpers');
 
 let app = express();
 
-appUtils.locals(app);
+locals(app);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
@@ -38,7 +41,7 @@ i18n.configure({
     cookie: 'i18n',
     defaultLocale: 'ar'
 });
-let I18N_KEY = "i18n_keedo" ;
+let I18N_KEY = "i18n_keedo";
 //app.use(bodyParser);
 app.use(cookieParser(I18N_KEY));
 // FIXME
@@ -46,7 +49,7 @@ app.use(session({
     secret: I18N_KEY,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: {maxAge: 60000}
 }));
 app.use(i18n.init);
 
@@ -59,9 +62,10 @@ app.use(function (req, res, next) {
     else {
         res.locals.activeUrl = 'index';
     }
-    res.locals.isAdmin = req.session.isUserAdmin ;
-    res.locals.isLoggedIn = req.session.isLoggedIn ;
+    res.locals.isAdmin = req.session.isUserAdmin;
+    res.locals.isLoggedIn = req.session.isLoggedIn;
     res.locals.locale = res.getLocale();
+    res.locals.currentPath = req.path;
     next();
 });
 
@@ -75,7 +79,7 @@ app.use('/assets', express.static(path.join(helpers.getBasePath(), 'assets')));
 
 app.post('/locale', (req, res) => {
     res.cookie('i18n', req.body.locale);
-    res.redirect('/')
+    res.redirect(req.query.back);
 });
 
 // set the view engine to ejs
@@ -84,27 +88,26 @@ app.set('views', __dirname + '/views')
 
 app.set('view engine', 'ejs');
 app.use(require('./routes'));
-
 app.get('/about', function (req, res, next) {
     res.render(page);
 });
 // render business
 app.get('/:page?', function (req, res, next) {
-    //res.sendFile(path.join(helpers.getBasePath(), 'public', 'business.html'))
     let page = req.params.page || 'index';
     res.render(page);
 });
 // no stacktraces leaked to user
-app.use(function (req, res, next) {
+app.use(function (err, req, res, next) {
     res.status(err.status || 404);
-    res.render("404", {error : err});
+    console.log(err);
+    res.render("404", {error: JSON.stringify(err)});
 });
 
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     console.log(err);
     res.status(err.status || 500);
-    res.render("500", {error : err});
+    res.render("500", {error: err});
 });
 
 module.exports = app;

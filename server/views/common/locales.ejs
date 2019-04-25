@@ -1,7 +1,7 @@
 <div class="row text-center">
-    <form method="post" action="/locale">
-        <input type="submit" class="btn btn-default" value="en" name="locale"/>
-        <input type="submit" class="btn btn-default" value="fr" name="locale"/>
-        <input type="submit" class="btn btn-default" value="ar" name="locale"/>
+    <form method="post" action="/locale?back=<%= currentPath  %>">
+        <button type="submit" class="btn btn-default" value="ar" name="locale">العربية</button>
+        <button type="submit" class="btn btn-default" value="en" name="locale">English</button>
+        <button type="submit" class="btn btn-default" value="fr" name="locale">Français</button>
     </form>
 </div>

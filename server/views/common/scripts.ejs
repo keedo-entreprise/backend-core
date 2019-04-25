@@ -1,8 +1,4 @@
-<% if (env.isProd) { %>
-<!-- Main -->
-<script src="/js/dist/vendor.bundle.min.js"></script>
-<script src="/js/dist/common.bundle.min.js"></script>
-<% } else { %>
-<script src="/js/dist/vendor.bundle.js"></script>
-<script src="/js/dist/common.bundle.js"></script>
-<% } %>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vue"></script>
+<script src="/js/dist/vendor<%= publicFileSuffixName %>"></script>
+<script src="/js/dist/common<%= publicFileSuffixName %>"></script>

@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
                 console.log(e)
             }
         );
-});/**
+});
+/**
  *
  */
 router.get('/top', (req, res) => {
@@ -38,50 +39,127 @@ router.get('/top', (req, res) => {
  *
  */
 router.get('/:id', (req, res) => {
-    console.log(req.params.id);
-    models.Story
-        .findOne({_id : req.params.id})
-        .then(
-            (item) => {
-                res.send(item);
+    let story = {
+        size: {
+            height: 360,
+            width: 470
+        },
+        pages: [
+            {
+                index: 0,
+                "elements": [
+                    {
+                        type: "TEXT",
+                        style: {
+                            "z-index": 1,
+                            "color": "white",
+                            "width": "300px",
+                            "height": "200px",
+                            "fontName": "Joti+One",
+                            "font-family": "Joti One, cursive",
+                            "text-align": "right",
+                            "backgroundColor": "transparent"
+                        },
+                        position: {
+                            "left": "20",
+                            "top": "20"
+                        },
+                        background: '/img/photo-1462332420958-a05d1e002413.jpg',
+                        text: "Hello from the other side"
+                    },
+                    {
+                        type: "COVER",
+                        src: '/img/photo-1462332420958-a05d1e002413.jpg'
+                    },
+                    {
+                        type: "SOUND",
+                        src: 'https://www.nasa.gov/mp3/693857main_emfisis_chorus_1.mp3'
+                    }
+                ]
             },
-            (e) => {
-                res.send({
-                    pagesCount: 6,
-                    thumbnails : [
-                        {
-                            page : 1,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXwjoKQAVMDMt1hjPpyRqGtPI9rGDtzF6KbnJTVdBSeM-ogKFuzg'
+            {
+                index: 1,
+                "elements": [
+                    {
+                        style: {
+                            "color": "red",
+                            "width": "200",
+                            "height": "200",
                         },
-                        {
-                            page : 2,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfukTkeWm1gGZJfaPRp9v3Xzt05u9wXqxzvX4wbMOPMKsVH1rJXw'
-                        },
-
-                        {
-                            page : 3,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfukTkeWm1gGZJfaPRp9v3Xzt05u9wXqxzvX4wbMOPMKsVH1rJXw'
-                        },
-
-                        {
-                            page : 4,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfukTkeWm1gGZJfaPRp9v3Xzt05u9wXqxzvX4wbMOPMKsVH1rJXw'
-                        },
-
-                        {
-                            page : 5,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfukTkeWm1gGZJfaPRp9v3Xzt05u9wXqxzvX4wbMOPMKsVH1rJXw'
-                        },
-
-                        {
-                            page : 6,
-                            url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfukTkeWm1gGZJfaPRp9v3Xzt05u9wXqxzvX4wbMOPMKsVH1rJXw'
+                        type: "TEXT",
+                        text: "Hello from the other side ",
+                        position: {
+                            "left": "120",
+                            "top": "20"
                         }
-                    ]
-                });
+                    },
+                    {
+                        type: "SOUND",
+                        src: 'https://www.nasa.gov/mp3/693857main_emfisis_chorus_1.mp3'
+                    }
+                ]
+            },
+            {
+                background: "/img/photo-1462332420958-a05d1e002413.jpg",
+                index: 2,
+                "elements": [
+                    {
+                        style: {
+                            "color": "red",
+                            "width": "200",
+                            "height": "200",
+                        },
+                        type: "text",
+                        text: "Hello from the other side ",
+                        position: {
+                            "left": "250",
+                            "top": "20"
+                        }
+                    }
+                ]
+            },
+            {
+                background: "/img/photo-1462332420958-a05d1e002413.jpg",
+                index: 3,
+                "elements": [
+                    {
+                        style: {
+                            "color": "red",
+                            "width": "200",
+                            "height": "200",
+                        },
+                        type: "text",
+                        text: "next from the other side ",
+                        position: {
+                            "left": "250",
+                            "top": "20"
+                        }
+                    }
+                ]
+            },
+            {
+                background: "/img/photo-1462332420958-a05d1e002413.jpg",
+                index: 4,
+                "elements": [
+                    {
+                        style: {
+                            "color": "red",
+                            "width": "200",
+                            "height": "200",
+                        },
+                        type: "text",
+                        text: "next from the right side ",
+                        position: {
+                            "left": "250",
+                            "top": "20"
+                        }
+                    }
+                ]
             }
-        );
 
+        ]
+    };
+    res.send(story);
 });
 /**
  *

@@ -1,0 +1,12 @@
+<% layout('./../layout') %>
+<div class="viewer container">
+    <% include editor/components/_toolbar.ejs%>
+    <div class="row col-lg-12" id="editor_container">
+        <!--<% include editor/components/_sidebar.ejs %>-->
+        <% include editor/components/_pages_container.ejs%>
+    </div>
+</div>
+<div id="overlay"></div>
+
+
+<% block('scripts', script("/js/dist/builder" + publicFileSuffixName)) %>

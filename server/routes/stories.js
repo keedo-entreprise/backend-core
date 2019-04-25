@@ -2,17 +2,10 @@ let router = require('express').Router();
 let helpers = require('app-utils').helpers;
 let path = require('path');
 let models = require('models');
+let renderView = require('./../utils/render').renderView;
 
 const VIEWS_PATH = 'stories';
 
-//
-function renderView(viewName, res, loclas) {
-    loclas = loclas || {};
-    if (!loclas.error) {
-        loclas.error = null;
-    }
-    res.render([VIEWS_PATH, viewName].join('\\'), loclas);
-}
 
 router.use(function (req, res, next) {
     res.locals.smallFooter = true;
@@ -23,28 +16,40 @@ router.use(function (req, res, next) {
  */
 router.get('/', (req, res) => {
     models.Story.find(function (err, items) {
-        renderView('list', res, {list: items});
+        renderView([VIEWS_PATH, 'list'], res, {list: items});
     })
+});
+
+/**
+ *
+ */
+router.get('/new/', (req, res) => {
+    renderView([VIEWS_PATH, 'new'], res, {item: {}});
 });
 /**
  *
  */
-router.get('/edit/:id', (req, res) => {
-    res.render([VIEWS_PATH, 'edit'].join('\\'));
+router.get('/:id/edit/', (req, res) => {
+    models.Story.findById(req.params.id, function (err, items) {
+        renderView([VIEWS_PATH, 'edit'], res);
+    });
 });
+
 /**
  *
  */
 router.get('/:id', (req, res) => {
     models.Story.findById(req.params.id, function (err, item) {
-        renderView('view', res, {item: item});
+        item.price_tn = "6 dt";
+        item.price_other = "12 dt";
+        renderView([VIEWS_PATH, 'view'], res, {item: item});
     });
 });
 /**
  *
  */
 router.post('/', (req, res) => {
-    res.render([VIEWS_PATH, 'edit'].join('\\'));
+    renderView([VIEWS_PATH, 'edit'], res);
 });
 
 module.exports = router;

@@ -1,36 +1,59 @@
-webpackJsonp([0],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */
-/***/ (function(module, exports) {
+webpackJsonp([0],{
 
-// require /app/stories/builder/index.js
-;(function () {
-    Studio.EVENTS = {
-        CLICK_WINDOW: "CLICK_WINDOW",
-        CLICK_THUMBNAIL_PAGE : "CLICK_THUMBNAIL_PAGE",
-        NEW_PAGE : "NEW_PAGE",
-        PAGE_ELEMENT_CLICK : "PAGE_ELEMENT_CLICK"
-    };
-    Studio.ELEMENTS_TYPE = {
-        TEXT : "TEXT",
-        IMAGE : "IMAGE",
-        BACKGROUND : 'BACKGROUND'
-    };
+/***/ 23:
+/***/ (function(module, exports, __webpack_require__) {
 
-    Studio.PAGES_TYPE = {
-        BACK : "BACK",
-        FRONT : "FRONT",
-        FIRST : 'FIRST',
-        LAST : 'LAST'
-    };
-}());
+/* WEBPACK VAR INJECTION */(function($, screenfull) {//
+__webpack_require__(24);
 
+__webpack_require__(25);
+
+// toolbar
+__webpack_require__(26);
+__webpack_require__(27);
+__webpack_require__(28);
+__webpack_require__(29);
+__webpack_require__(30);
+
+// sidebar
+__webpack_require__(31);
+
+// page
+__webpack_require__(32);
+__webpack_require__(33);
+__webpack_require__(34);
+
+// main app
+__webpack_require__(35);
+
+
+$(document).ready(function () {
+    console.log('xxxxxxx');
+    $('button#preview_btn').click(function () {
+        if (screenfull.enabled) {
+            screenfull.request($('#previewContainer')[0]);
+        }
+    });
+    $('#previewContainer').dblclick(function () {
+        if (screenfull.enabled) {
+            screenfull.request($('#previewContainer')[0]);
+        }
+    });
+    $('#previewContainer').perfectScrollbar();
+
+    $(document).on('click', function (e) {
+        if (e.currentTarget == document) {
+            $.Topic(Studio.EVENTS.CLICK_WINDOW).publish();
+        }
+        console.log(e.currentTarget);
+    });
+});
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(2)))
 
 /***/ }),
-/* 4 */,
-/* 5 */
+
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57,7 +80,324 @@ _.extend(Studio, {
 // console.log ("extending");
 
 /***/ }),
-/* 6 */
+
+/***/ 25:
+/***/ (function(module, exports) {
+
+// require /app/stories/builder/index.js
+;(function () {
+    Studio.EVENTS = {
+        CLICK_WINDOW: "CLICK_WINDOW",
+        CLICK_THUMBNAIL_PAGE : "CLICK_THUMBNAIL_PAGE",
+        NEW_PAGE : "NEW_PAGE",
+        PAGE_ELEMENT_CLICK : "PAGE_ELEMENT_CLICK"
+    };
+    Studio.ELEMENTS_TYPE = {
+        TEXT : "TEXT",
+        IMAGE : "IMAGE",
+        BACKGROUND : 'BACKGROUND'
+    };
+
+    Studio.PAGES_TYPE = {
+        BACK : "BACK",
+        FRONT : "FRONT",
+        FIRST : 'FIRST',
+        LAST : 'LAST'
+    };
+}());
+
+
+/***/ }),
+
+/***/ 26:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {;(function () {
+    Studio.BaseToolbarPrototype = {
+        /**
+         *
+         */
+        init: function () {
+            this.$el = $(this.selector);
+            // all events
+            this.$el.find('[data-toolbar-for]').each(function (index, element) {
+                this.bindPopper(element);
+            }.bind(this));
+            // to hide popups
+            $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.hideAllPoppers.bind(this));
+            $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.hide.bind(this));
+            $.Topic(Studio.EVENTS.PAGE_ELEMENT_CLICK).subscribe(this.hide.bind(this));
+
+            this.bindEvents();
+        },
+        /**
+         *
+         */
+        hide: function () {
+            this.$el.hide();
+        },
+        /**
+         *
+         */
+        show: function () {
+            this.$el.show();
+        },
+        /**
+         *
+         */
+        hideAllPoppers: function () {
+            this.$el.find('.toolbar__popover').removeClass('visible');
+        },
+
+        /**
+         *
+         * @param button
+         */
+        bindPopper: function (button) {
+            var selector;
+            selector = $(button).data('toolbar-for');
+            button.$popper = this.$el.find("[data-toolbar='" + selector + "']:eq(0)");
+            $(button).click(function (event) {
+                this.hideAllPoppers();
+                event.currentTarget.$popper.toggleClass('visible');
+            }.bind(this));
+        }
+
+    };
+})()
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 27:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(_, $) {// TextToolbar
+;(function () {
+    "use strict"
+    /**
+     *
+     * @constructor
+     */
+    function TextToolbar() {
+        this.init();
+    };
+
+    /**
+     *
+     * @type {{}}
+     */
+    TextToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
+        selector: '#toolbar__text',
+        /**
+         *
+         */
+        bindEvents: function () {
+            this.$el.find('[data-action]').click(function () {
+                let action = $(this).data('action').split(':');
+                let property = action[0];
+                let value = action[1];
+                switch (action) {
+                    case "text-align":
+
+                        break;
+                }
+                $(Studio.getCurrentActiveElement()).css(property, value);//
+            });
+        }
+    });
+    Studio.TextToolbar = TextToolbar;
+})();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 28:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(_, $) {;(function () {
+    'use strict';
+    // AddOnsToolbar
+    (function () {
+        /**
+         *
+         * @constructor
+         */
+        function AddonsToolbar() {
+            this.init();
+        };
+
+        /**
+         *
+         * @type {{}}
+         */
+        AddonsToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
+            /**
+             *
+             */
+            selector: '#toolbar__addons',
+            /**
+             *
+             */
+            bindEvents: function () {
+                this.$el.find('[data-action]').click(function () {
+                    console.log($(this).data('action'));
+                    $(Studio.getCurrentActiveElement());//
+                });
+            }
+        });
+        Studio.AddonsToolbar = AddonsToolbar;
+    })();
+
+
+}());
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 29:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(_, $) {// TextToolbar
+;(function () {
+    "use strict"
+    /**
+     *
+     * @constructor
+     */
+    function ImageToolbar() {
+        // register modal component
+        Vue.component('modal', {
+            template: '#modal_template'
+        });
+
+// start app
+        this._patternsModal = new Vue({
+            el: '#patterns_modal',
+            data: {
+                showModal: false,
+                patterns: []
+            },
+            methods: {
+                toggle: function () {
+                    this.showModal = !this.showMoal
+                }
+            }
+        });
+        this.init();
+    };
+
+    /**
+     *
+     * @type {{}}
+     */
+    ImageToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
+        selector: '#toolbar__image',
+        /**
+         *
+         */
+        bindEvents: function () {
+            console.log("bindEvents")
+            this.$el.find('[data-action]').click(function (el) {
+                let action = $(el.currentTarget).data('action');
+                switch (action) {
+                    case "pattern":
+                        this._patternsModal.toggle();
+                        $.get([API_HOST, 'addons', 'patterns'].join('/')).then(function (response) {
+                            this._patternsModal.patterns = response;
+                        }.bind(this));
+                        //http://localhost:5000/api/v0//
+                        break;
+                }
+                //$(Studio.getCurrentActiveElement()).css(property, value);//
+            }.bind(this));
+        }
+    });
+    Studio.ImageToolbar = ImageToolbar;
+})();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 30:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {;(function () {
+    /**
+     *
+     * @param params
+     * @constructor
+     */
+    function BuilderToolbar(params) {
+        this._addOnToolbar = new Studio.AddonsToolbar();
+        this._textToolbar = new Studio.TextToolbar();
+        this._imageToolbar = new Studio.ImageToolbar();
+        $.Topic(Studio.EVENTS.PAGE_ELEMENT_CLICK).subscribe(this.onPageElementClick.bind(this));
+        $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.showMainToolbar.bind(this));
+        $('[data-action="new-page"]').click(function () {
+            $.Topic(Studio.EVENTS.NEW_PAGE).publish();
+        });
+        $('#toolbar').click(function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    BuilderToolbar.prototype = {
+        /**
+         * Fired once an element of page has been clicked
+         */
+        onPageElementClick: function (dom, element) {
+            let type = element.type.toUpperCase() ;
+            if (type === Studio.ELEMENTS_TYPE.TEXT) {
+                this._textToolbar.show();
+            } else if (type === Studio.ELEMENTS_TYPE.IMAGE || type === Studio.ELEMENTS_TYPE.BACKGROUND) {
+                this._imageToolbar.show();
+            }
+            else {
+                this._addOnToolbar.show();
+            }
+        },
+        showMainToolbar : function () {
+            this._addOnToolbar.show();
+        }
+    };
+    // Export
+    Studio.BuilderToolbar = BuilderToolbar;
+})();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 31:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {;(function () {
+    'use strict';
+    /**
+     *
+     * @param params
+     * @constructor
+     */
+    function SideBar(params) {
+        $(document).ready(function () {
+            $("#accordion").accordion({heightStyle: "content", collapsible: true});
+            $('.sideBar_component').each(function () {
+                $(this).perfectScrollbar();
+            });
+        })
+    };
+
+    // Export
+    Studio.SideBar = SideBar ;
+    new SideBar();
+}());
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 32:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {// require /app/stories/builder/constants.js
@@ -143,358 +483,8 @@ _.extend(Studio, {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($, screenfull) {//
-__webpack_require__(5);
-
-__webpack_require__(3);
-
-// toolbar
-__webpack_require__(26);
-__webpack_require__(27);
-__webpack_require__(28);
-__webpack_require__(29);
-__webpack_require__(30);
-
-// sidebar
-__webpack_require__(31);
-
-// page
-__webpack_require__(6);
-__webpack_require__(32);
-__webpack_require__(33);
-
-// main app
-__webpack_require__(34);
-
-
-$(document).ready(function () {
-    $('button#preview_btn').click(function () {
-        if (screenfull.enabled) {
-            screenfull.request($('#previewContainer')[0]);
-        }
-    })
-    $('#previewContainer').dblclick(function () {
-        if (screenfull.enabled) {
-            screenfull.request($('#previewContainer')[0]);
-        }
-    });
-    $('#previewContainer').perfectScrollbar();
-
-    $(document).on('click', function (e) {
-        if (e.currentTarget == document) {
-            $.Topic(Studio.EVENTS.CLICK_WINDOW).publish();
-        }
-        console.log(e.currentTarget);
-    });
-});
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(2)))
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {;(function () {
-    Studio.BaseToolbarPrototype = {
-        /**
-         *
-         */
-        init: function () {
-            this.$el = $(this.selector);
-            // all events
-            this.$el.find('[data-toolbar-for]').each(function (index, element) {
-                this.bindPopper(element);
-            }.bind(this));
-            // to hide popups
-            $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.hideAllPoppers.bind(this));
-            $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.hide.bind(this));
-            $.Topic(Studio.EVENTS.PAGE_ELEMENT_CLICK).subscribe(this.hide.bind(this));
-
-            this.bindEvents();
-        },
-        /**
-         *
-         */
-        hide: function () {
-            this.$el.hide();
-        },
-        /**
-         *
-         */
-        show: function () {
-            this.$el.show();
-        },
-        /**
-         *
-         */
-        hideAllPoppers: function () {
-            this.$el.find('.toolbar__popover').removeClass('visible');
-        },
-
-        /**
-         *
-         * @param button
-         */
-        bindPopper: function (button) {
-            var selector;
-            selector = $(button).data('toolbar-for');
-            button.$popper = this.$el.find("[data-toolbar='" + selector + "']:eq(0)");
-            $(button).click(function (event) {
-                this.hideAllPoppers();
-                event.currentTarget.$popper.toggleClass('visible');
-            }.bind(this));
-        }
-
-    };
-})()
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(_, $) {// TextToolbar
-;(function () {
-    "use strict"
-    /**
-     *
-     * @constructor
-     */
-    function TextToolbar() {
-        this.init();
-    };
-
-    /**
-     *
-     * @type {{}}
-     */
-    TextToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
-        selector: '#toolbar__text',
-        /**
-         *
-         */
-        bindEvents: function () {
-            this.$el.find('[data-action]').click(function () {
-                let action = $(this).data('action').split(':');
-                let property = action[0];
-                let value = action[1];
-                switch (action) {
-                    case "text-align":
-
-                        break;
-                }
-                $(Studio.getCurrentActiveElement()).css(property, value);//
-            });
-        }
-    });
-    Studio.TextToolbar = TextToolbar;
-})();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(_, $) {;(function () {
-    'use strict';
-    // AddOnsToolbar
-    (function () {
-        /**
-         *
-         * @constructor
-         */
-        function AddonsToolbar() {
-            this.init();
-        };
-
-        /**
-         *
-         * @type {{}}
-         */
-        AddonsToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
-            /**
-             *
-             */
-            selector: '#toolbar__addons',
-            /**
-             *
-             */
-            bindEvents: function () {
-                this.$el.find('[data-action]').click(function () {
-                    console.log($(this).data('action'));
-                    $(Studio.getCurrentActiveElement());//
-                });
-            }
-        });
-        Studio.AddonsToolbar = AddonsToolbar;
-    })();
-
-
-}());
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(_, $) {// TextToolbar
-;(function () {
-    "use strict"
-    /**
-     *
-     * @constructor
-     */
-    function ImageToolbar() {
-        // register modal component
-        Vue.component('modal', {
-            template: '#modal_template'
-        });
-
-// start app
-        this._patternsModal = new Vue({
-            el: '#patterns_modal',
-            data: {
-                showModal: false,
-                patterns: []
-            },
-            methods: {
-                toggle: function () {
-                    this.showModal = !this.showMoal
-                }
-            }
-        });
-        this.init();
-    };
-
-    /**
-     *
-     * @type {{}}
-     */
-    ImageToolbar.prototype = _.extend({}, Studio.BaseToolbarPrototype, {
-        selector: '#toolbar__image',
-        /**
-         *
-         */
-        bindEvents: function () {
-            console.log("bindEvents")
-            this.$el.find('[data-action]').click(function (el) {
-                let action = $(el.currentTarget).data('action');
-                switch (action) {
-                    case "pattern":
-                        this._patternsModal.toggle();
-                        $.get([API_HOST, 'addons', 'patterns'].join('/')).then(function (response) {
-                            this._patternsModal.patterns = response;
-                        }.bind(this));
-                        //http://localhost:5000/api/v0//
-                        break;
-                }
-                //$(Studio.getCurrentActiveElement()).css(property, value);//
-            }.bind(this));
-        }
-    });
-    Studio.ImageToolbar = ImageToolbar;
-})();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {;(function () {
-    /**
-     *
-     * @param params
-     * @constructor
-     */
-    function BuilderToolbar(params) {
-        this._addOnToolbar = new Studio.AddonsToolbar();
-        this._textToolbar = new Studio.TextToolbar();
-        this._imageToolbar = new Studio.ImageToolbar();
-        $.Topic(Studio.EVENTS.PAGE_ELEMENT_CLICK).subscribe(this.onPageElementClick.bind(this));
-        $.Topic(Studio.EVENTS.CLICK_WINDOW).subscribe(this.showMainToolbar.bind(this));
-        $('[data-action="new-page"]').click(function () {
-            $.Topic(Studio.EVENTS.NEW_PAGE).publish();
-        });
-        $('#toolbar').click(function (event) {
-            event.stopPropagation();
-        });
-    }
-
-    BuilderToolbar.prototype = {
-        /**
-         * Fired once an element of page has been clicked
-         */
-        onPageElementClick: function (dom, element) {
-            let type = element.type.toUpperCase() ;
-            if (type === Studio.ELEMENTS_TYPE.TEXT) {
-                this._textToolbar.show();
-            } else if (type === Studio.ELEMENTS_TYPE.IMAGE || type === Studio.ELEMENTS_TYPE.BACKGROUND) {
-                this._imageToolbar.show();
-            }
-            else {
-                this._addOnToolbar.show();
-            }
-        },
-        showMainToolbar : function () {
-            this._addOnToolbar.show();
-        }
-    };
-    // Export
-    Studio.BuilderToolbar = BuilderToolbar;
-})();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {;(function () {
-    'use strict';
-    /**
-     *
-     * @param params
-     * @constructor
-     */
-    function SideBar(params) {
-        $(document).ready(function () {
-            $("#accordion").accordion({heightStyle: "content", collapsible: true});
-            $('.sideBar_component').each(function () {
-                $(this).perfectScrollbar();
-            });
-        })
-    };
-
-    // Export
-    Studio.SideBar = SideBar ;
-    new SideBar();
-}());
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 32 */
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($, _) {;(function () {
@@ -633,6 +623,8 @@ $(document).ready(function () {
          * @private
          */
         _addPageElement: function (elementProperties) {
+
+            // create  a new page
             let pageElement = new Studio.PageElement(elementProperties);
             this.pageElements.push(pageElement);
             let $element = pageElement.getDomElement();
@@ -661,7 +653,8 @@ $(document).ready(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(1)))
 
 /***/ }),
-/* 33 */
+
+/***/ 34:
 /***/ (function(module, exports) {
 
 ;(function () {
@@ -681,7 +674,8 @@ $(document).ready(function () {
 
 
 /***/ }),
-/* 34 */
+
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(_, $, screenfull) {;(function () {
@@ -828,4 +822,5 @@ $(document).ready(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0), __webpack_require__(2)))
 
 /***/ })
-],[25]);
+
+},[23]);

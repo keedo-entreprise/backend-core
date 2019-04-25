@@ -1,0 +1,40 @@
+<div id="toolbar">
+    <ul class="pull-left list-inline ">
+        <li>
+            <h3 id="tooltip"> <%= item.title %> </h3>
+        </li>
+        <li id="page_indicator">
+            <input value="1"/>/12
+        </li>
+        <li id="display_style">
+            <div class="selected"><i class="icon-page-break"></i></div>
+            <div class="rotate"><i class="icon-pagebreak "></i></div>
+        </li>
+        <!--<input type="text" id="search" placeholder="search">-->
+    </ul>
+    <div id="toolbar__components" class="pull-right">
+        <ul class="list-inline">
+            <li>
+                <% include _toolbar_addons.ejs %>
+                <% include _toolbar_image.ejs %>
+                <% include _toolbar_text.ejs %>
+            </li>
+
+            <li>
+                <span>|</span>
+            </li>
+            <li>
+                <a data-action="new-page"><span>Add page</span> <i class="icon-plus"></i></a>
+            </li>
+            <span>|</span>
+            <li>
+                <a><span>Save</span> <i class="icon-save"></i></a>
+            </li>
+            <li>
+                <a><span>Publish</span> <i class="icon-share"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

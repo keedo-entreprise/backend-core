@@ -6,6 +6,12 @@ let env = require([process.cwd(), 'env.js'].join('/'));
 let helpers = {
     /**
      *
+     */
+    isProd: function () {
+        return process.env.NODE_ENV === "production";
+    },
+    /**
+     *
      * @returns {*}
      */
     getBasePath: () => {

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
-<%- include common/head.ejs %>
 <%- blocks.stylesheets %>
 <body>
-<% if (!env.isProd) { %>
-<div class="text-center alert-danger"> Your are using a non production version</div>
-<% } %>
 <%- include common/nav.ejs %>
 <section id="page">
     <%- body -%>
     <%- include common/footer.ejs %>
 </section>
+
 <script type="text/javascript" src="https://unpkg.com/vue"></script>
 <%- include common/scripts.ejs %>
 <%- blocks.scripts %>
 </body>
+
+<% if (!env.isProd) { %>
+<div id="notif" class="text-center alert-danger app-dev-notifier"> Your are using a non production version</div>
+<% } %>
 </html>

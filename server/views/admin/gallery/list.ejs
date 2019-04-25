@@ -14,7 +14,7 @@
                 <% _.each(list, function(entry){ %>
                 <div class="col-md-4">
                     <div class="fh5co-portfolio animate-box">
-                        <a href="/admin/pictures/<%= entry.id %>">
+                        <a href="/admin/gallery/<%= entry.id %>">
                             <div class="portfolio-entry"
                                  style="background-image: url('/uploads/<%= entry.fileName %>');"></div>
                             <div class="portfolio-text">
@@ -29,7 +29,7 @@
                 <% }); %>
                 <div class="col-md-4">
                     <div class="fh5co-portfolio animate-box">
-                        <a href="/admin/pictures/new">
+                        <a href="/admin/gallery/new">
                             <div class="portfolio-text">
                                 <h3><%= __('Add new ') %></h3>
                             </div>

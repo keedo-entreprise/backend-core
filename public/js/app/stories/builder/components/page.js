@@ -80,7 +80,7 @@
         },
         /**
          *
-         * @private
+         * @privatedocu
          */
         _buildPageBack: function (options) {
             this.$el.addClass('page__back');
@@ -134,6 +134,8 @@
          * @private
          */
         _addPageElement: function (elementProperties) {
+
+            // create  a new page
             let pageElement = new Studio.PageElement(elementProperties);
             this.pageElements.push(pageElement);
             let $element = pageElement.getDomElement();

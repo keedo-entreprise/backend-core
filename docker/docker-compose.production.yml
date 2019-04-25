@@ -1,0 +1,16 @@
+###
+# Copyright (c) 2016-2018 Yalla
+###
+
+version: "3"
+
+services:
+  web-app:
+    environment:
+      - DEBUG=*
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://yalla-db:passpass@ds135916.mlab.com:35916/yalla
+      - SENDGRID_API_KEY=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
+      - ALLOWED_ORIGINS=https://yalla.com
+      - UPLOAD_FOLDER=C:\www\yalla
+      - REDIS_HOST=localhost

@@ -1,10 +1,10 @@
 webpackJsonp([4],{
 
-/***/ 21:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($, _) {
-let Cookies = __webpack_require__(4);
+let Cookies = __webpack_require__(3);
 $(document).ready(function (){
     function loadCategories() {
         console.log('##########################');
@@ -97,4 +97,4 @@ $(document).ready(function (){
 
 /***/ })
 
-},[21]);
+},[19]);

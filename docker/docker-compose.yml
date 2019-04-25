@@ -1,0 +1,39 @@
+###
+# Copyright (c) 2016-2018 Keedo
+###
+
+version: "3"
+
+services:
+  nginx:
+      image: nginx:1.13-alpine
+      ports:
+        - "80:80"
+        - "443:443"
+        - "8883:8883"
+      deploy:
+        restart_policy:
+          condition: on-failure
+  web-app:
+    image : keedo:latest
+    depends_on:
+        - mongodb
+        - nginx
+    deploy:
+         replicas: 2
+         restart_policy:
+             condition: on-failure
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGODB_USER: root
+      MONGODB_PASSWORD: root
+      MONGODB_DB: keedo
+    networks:
+      - mongodb
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "27017:27017"
