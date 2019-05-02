@@ -1,6 +1,5 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-let utils = require('app-utils');
 let addOnSchema = mongoose.Schema({
     title: {
         type: String,

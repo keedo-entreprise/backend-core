@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-let utils = require('app-utils');
+let accounts = require('./../utils/accounts');
 let userSchema = mongoose.Schema({
     isVerified: {type: Boolean, default: false},
     isAdmin: {type: Boolean, default: false},
@@ -27,7 +27,7 @@ let userSchema = mongoose.Schema({
 });
 // assign a function to the "methods" object of our userSchema
 userSchema.methods.setPassword = function (password) {
-    let passwordHashAndSalt = utils.accounts.hashPassword(password);
+    let passwordHashAndSalt = accounts.hashPassword(password);
     this.passwordHash = passwordHashAndSalt.passwordHash;
     this.passwordSalt = passwordHashAndSalt.passwordSalt;
     return this;

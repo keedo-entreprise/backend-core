@@ -1,5 +1,7 @@
-let models = require('models');
+let path = require('path');
 let router = require('express').Router();
+
+let models = require('../models');
 
 const VIEWS_PATH = 'categories';
 
@@ -9,13 +11,18 @@ function renderView(viewName, res, loclas) {
     if (!loclas.error) {
         loclas.error = null;
     }
-    res.render([VIEWS_PATH, viewName].join('\\'), loclas);
+    console.log(viewName);
+    console.log(path.join(VIEWS_PATH, viewName));
+    res.render(path.join(VIEWS_PATH, viewName), loclas);
 }
+
 /**
  *
  */
 router.get('/', (req, res) => {
+    console.log('xcxxx');
     models.Category.find(function (err, items) {
+        console.log('dddddd');
         renderView('list', res, {list: items});
     })
 });

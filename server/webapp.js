@@ -9,7 +9,7 @@ let session = require('express-session');
 
 let i18n = require("i18n");
 //let LRU = require('lru-cache');
-//let db = require('./db');
+require('./db');
 require('./utils/logger.js');
 
 

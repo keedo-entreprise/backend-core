@@ -1,4 +1,4 @@
-let models = require('models');
+let models = require('../../models');
 let router = require('express').Router();
 const VIEWS_PATH = 'builder/stories';
 

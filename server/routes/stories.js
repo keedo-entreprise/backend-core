@@ -1,7 +1,7 @@
 let router = require('express').Router();
-let helpers = require('app-utils').helpers;
+let helpers = require('../utils/helpers');
 let path = require('path');
-let models = require('models');
+let models = require('../models');
 let renderView = require('./../utils/render').renderView;
 
 const VIEWS_PATH = 'stories';

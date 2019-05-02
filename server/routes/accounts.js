@@ -1,7 +1,8 @@
-let models = require('models');
+let models = require('../models');
 let router = require('express').Router();
 let _ = require('underscore');
-let utils = require('app-utils');
+let accountsHelpers = require('../utils/accounts');
+let helpers = require('../utils/helpers');
 const VIEWS_PATH = 'accounts';
 //
 function renderView(viewName, res, loclas) {
@@ -26,7 +27,7 @@ function verifyPasswordResetLink(token, cb) {
             }
             // ok
             console.log(item.passwordResetTokenExpiresAt);
-            if (item.passwordResetTokenExpiresAt.getTime() > utils.accounts.getNextHoursDate(1)) {
+            if (item.passwordResetTokenExpiresAt.getTime() > accountsHelpers.getNextHoursDate(1)) {
                 cb("Link expired !");
             }
             cb(null, item);
@@ -71,8 +72,8 @@ router.post('/login', (req, res) => {
                         return renderView("login", res, {error: "No account !"});
                     }
                 }
-                if (utils.accounts.verifyDbPasswordHashWithInput(item.passwordHash, item.passwordSalt, password)) {
-                    utils.helpers.initUserSession(item, req);
+                if (accountsHelpers.verifyDbPasswordHashWithInput(item.passwordHash, item.passwordSalt, password)) {
+                    helpers.initUserSession(item, req);
                     if (req.session.isUserAdmin){
                         return res.redirect('/admin');
                     }
@@ -125,7 +126,7 @@ router.post('/register', (req, res) => {
  *
  */
 router.post('/log-out', (req, res) => {
-    utils.helpers.cleanUserSession(req);
+    helpers.cleanUserSession(req);
     res.redirect('/');
 });
 /**
@@ -153,7 +154,7 @@ router.post('/reset-password', (req, res) => {
         let password = req.body.password;
         let rePassword = req.body.re_password;
         if (!_.isEmpty(password) && _.isEqual(password, rePassword)) {
-            let passwordHashAndSalt = utils.accounts.hashPassword(password);
+            let passwordHashAndSalt = accountsHelpers.hashPassword(password);
             // check for length
             user.set({
                 passwordHash: passwordHashAndSalt.passwordHash,
@@ -192,9 +193,9 @@ router.post('/forgot-password', (req, res) => {
                     return renderView("forgot_password", res, {error: "No account !"});
                 }
             }
-            let resetLink = utils.accounts.getPasswordResetToken();
+            let resetLink = accountsHelpers.getPasswordResetToken();
             console.log(`>>>>>>>>>>>>> ${resetLink}`);
-            let nexHourTime = utils.accounts.getNextHoursDate(1);
+            let nexHourTime = accountsHelpers.getNextHoursDate(1);
             item.set({
                 passwordResetToken: resetLink,
                 passwordResetTokenExpiresAt: new Date(nexHourTime)

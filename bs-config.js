@@ -27,7 +27,7 @@ module.exports = {
         "ignoreInitial": true
     },
     "server": false,
-    "proxy": "localhost:8084",
+    "proxy": "localhost:5001",
     "port": 5000,
     "middleware": false,
     "serveStatic": [],

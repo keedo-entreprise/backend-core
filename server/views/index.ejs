@@ -1,9 +1,15 @@
 <%- layout('layout') %>
-
-<% block ('stylesheets', "<link rel='stylesheet' href='https://unpkg.com/bulma@0.7.4/css/bulma.css'>");%>
-<% block ('stylesheets', "<link rel='stylesheet' href='/css/style.css'>");%>
+<% block('stylesheets', "<link rel='stylesheet' href='/css/bulma.css'>"); %>
+<% block('stylesheets', "<link rel='stylesheet' href='/css/style.css'>"); %>
 <div>
-    <%- include welcome/blob-shape.svg %>
+    <div class="columns">
+        <div class="column">
+            <%- include welcome/blob-shape.svg %>
+        </div>
+        <div class="column has-text-centered">
+            <h1 class="title">Boom</h1>
+        </div>
+    </div>
 </div>
 <div style="text-align: right">
     <%- include welcome/blob-shape (1).svg %>

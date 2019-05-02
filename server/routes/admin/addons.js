@@ -1,6 +1,6 @@
-let models = require('models');
+let models = require('../../models');
 let router = require('express').Router();
-let helpers = require('app-utils').helpers ;
+let helpers = require('../../utils/helpers') ;
 let Busboy = require('busboy');
 let path = require('path');
 let fs = require('fs');
