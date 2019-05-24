@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
-<%- blocks.stylesheets %>
+<head>
+    <%- blocks.stylesheets %>
+    <link rel='stylesheet' href='/css/bulma.css'>
+    <link rel='stylesheet' href='/css/style.css'>
+</head>
 <body>
+
 <%- include common/nav.ejs %>
-<section id="page">
-    <%- body -%>
-    <%- include common/footer.ejs %>
-</section>
+<%- body -%>
+
+<%- include common/footer.ejs %>
 
 <script type="text/javascript" src="https://unpkg.com/vue"></script>
 <%- include common/scripts.ejs %>
